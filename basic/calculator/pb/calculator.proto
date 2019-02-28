@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package pb;
+
+message Add {
+    uint32 a = 1;
+    uint32 b = 2;
+}
+
+message AddRequest {
+    Add add = 1;
+}
+
+message AddResponse {
+    uint32 result = 1;
+}
+
+service CalculatorService{
+    // Unary
+    rpc Sum (AddRequest) returns (AddResponse);
+}
