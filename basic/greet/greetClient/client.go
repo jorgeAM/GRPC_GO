@@ -62,6 +62,6 @@ func doServerStreaming(client greet.GreetServiceClient) {
 			log.Fatalf("error while response: %v", err)
 		}
 
-		log.Fatalf("Response from GreetManyTimes: %v", res.Result)
+		fmt.Printf("Response from GreetManyTimes: %v \n", res.Result)
 	}
 }
