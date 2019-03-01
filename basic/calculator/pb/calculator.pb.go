@@ -147,27 +147,110 @@ func (m *AddResponse) GetResult() uint32 {
 	return 0
 }
 
+type PrimeRequest struct {
+	Number               uint32   `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PrimeRequest) Reset()         { *m = PrimeRequest{} }
+func (m *PrimeRequest) String() string { return proto.CompactTextString(m) }
+func (*PrimeRequest) ProtoMessage()    {}
+func (*PrimeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c686ea360062a8cf, []int{3}
+}
+
+func (m *PrimeRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PrimeRequest.Unmarshal(m, b)
+}
+func (m *PrimeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PrimeRequest.Marshal(b, m, deterministic)
+}
+func (m *PrimeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PrimeRequest.Merge(m, src)
+}
+func (m *PrimeRequest) XXX_Size() int {
+	return xxx_messageInfo_PrimeRequest.Size(m)
+}
+func (m *PrimeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_PrimeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PrimeRequest proto.InternalMessageInfo
+
+func (m *PrimeRequest) GetNumber() uint32 {
+	if m != nil {
+		return m.Number
+	}
+	return 0
+}
+
+type PrimeResponse struct {
+	Number               uint32   `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *PrimeResponse) Reset()         { *m = PrimeResponse{} }
+func (m *PrimeResponse) String() string { return proto.CompactTextString(m) }
+func (*PrimeResponse) ProtoMessage()    {}
+func (*PrimeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c686ea360062a8cf, []int{4}
+}
+
+func (m *PrimeResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_PrimeResponse.Unmarshal(m, b)
+}
+func (m *PrimeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_PrimeResponse.Marshal(b, m, deterministic)
+}
+func (m *PrimeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_PrimeResponse.Merge(m, src)
+}
+func (m *PrimeResponse) XXX_Size() int {
+	return xxx_messageInfo_PrimeResponse.Size(m)
+}
+func (m *PrimeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_PrimeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_PrimeResponse proto.InternalMessageInfo
+
+func (m *PrimeResponse) GetNumber() uint32 {
+	if m != nil {
+		return m.Number
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*Add)(nil), "pb.Add")
 	proto.RegisterType((*AddRequest)(nil), "pb.AddRequest")
 	proto.RegisterType((*AddResponse)(nil), "pb.AddResponse")
+	proto.RegisterType((*PrimeRequest)(nil), "pb.PrimeRequest")
+	proto.RegisterType((*PrimeResponse)(nil), "pb.PrimeResponse")
 }
 
 func init() { proto.RegisterFile("calculator.proto", fileDescriptor_c686ea360062a8cf) }
 
 var fileDescriptor_c686ea360062a8cf = []byte{
-	// 173 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x3c, 0x8e, 0xbb, 0x0e, 0x82, 0x40,
-	0x10, 0x45, 0xb3, 0x90, 0x60, 0x32, 0xf8, 0xdc, 0xc2, 0xa0, 0x95, 0x92, 0xf8, 0xa8, 0x28, 0xb0,
-	0xb4, 0x22, 0xfe, 0x01, 0x7c, 0xc1, 0x2e, 0x33, 0x85, 0x09, 0xba, 0xeb, 0x3e, 0xfc, 0x7e, 0x03,
-	0x8b, 0x94, 0x67, 0xe6, 0xe6, 0xdc, 0x0b, 0xeb, 0x56, 0x74, 0xad, 0xef, 0x84, 0x53, 0xa6, 0xd0,
-	0x46, 0x39, 0xc5, 0x23, 0x2d, 0xf3, 0x23, 0xc4, 0x15, 0x22, 0x9f, 0x03, 0x13, 0x19, 0x3b, 0xb0,
-	0xeb, 0xa2, 0x66, 0xa2, 0x27, 0x99, 0x45, 0x81, 0x64, 0x7e, 0x01, 0xa8, 0x10, 0x6b, 0xfa, 0x78,
-	0xb2, 0x8e, 0xef, 0x20, 0x16, 0x88, 0x43, 0x36, 0x2d, 0x67, 0x85, 0x96, 0x45, 0xff, 0xec, 0x6f,
-	0xf9, 0x09, 0xd2, 0x21, 0x68, 0xb5, 0x7a, 0x5b, 0xe2, 0x5b, 0x48, 0x0c, 0x59, 0xdf, 0xb9, 0x51,
-	0x3c, 0x52, 0x79, 0x87, 0xcd, 0x63, 0x9a, 0xd2, 0x90, 0xf9, 0x3e, 0x5b, 0xe2, 0x67, 0x88, 0x1b,
-	0xff, 0xe2, 0xcb, 0xbf, 0x30, 0xb4, 0xed, 0x57, 0x13, 0x07, 0xa9, 0x4c, 0x86, 0xe9, 0xb7, 0x5f,
-	0x00, 0x00, 0x00, 0xff, 0xff, 0xf0, 0x5d, 0x40, 0x87, 0xce, 0x00, 0x00, 0x00,
+	// 224 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x90, 0xcf, 0x4e, 0x02, 0x31,
+	0x10, 0xc6, 0x2d, 0x1b, 0xd7, 0x64, 0x00, 0x85, 0x39, 0x10, 0xe4, 0xa4, 0x4d, 0x14, 0x4e, 0x1b,
+	0x82, 0x4f, 0x40, 0x7c, 0x01, 0x03, 0x4f, 0xd0, 0x6e, 0xe7, 0x40, 0xb2, 0x4b, 0x6b, 0xff, 0xf8,
+	0xfc, 0xa6, 0xed, 0x16, 0xf7, 0xe0, 0xf1, 0x37, 0xf3, 0xcb, 0x37, 0x5f, 0x0b, 0x8b, 0x56, 0x74,
+	0x6d, 0xe8, 0x84, 0xd7, 0xb6, 0x31, 0x56, 0x7b, 0x8d, 0x13, 0x23, 0xf9, 0x2b, 0x54, 0x47, 0xa5,
+	0x70, 0x06, 0x4c, 0xac, 0xd9, 0x0b, 0xdb, 0xcd, 0x4f, 0x4c, 0x44, 0x92, 0xeb, 0x49, 0x26, 0xc9,
+	0xb7, 0x00, 0x47, 0xa5, 0x4e, 0xf4, 0x1d, 0xc8, 0x79, 0x7c, 0x86, 0x4a, 0x28, 0x95, 0xdc, 0xe9,
+	0xe1, 0xa1, 0x31, 0xb2, 0x89, 0xcb, 0x38, 0xe3, 0x6f, 0x30, 0x4d, 0xa2, 0x33, 0xfa, 0xea, 0x08,
+	0x57, 0x50, 0x5b, 0x72, 0xa1, 0xf3, 0x43, 0xf0, 0x40, 0xfc, 0x1d, 0x66, 0x5f, 0xf6, 0xd2, 0x53,
+	0x49, 0x5c, 0x41, 0x7d, 0x0d, 0xbd, 0x24, 0x5b, 0xbc, 0x4c, 0x7c, 0x0b, 0xf3, 0xc1, 0xfb, 0x0b,
+	0xfc, 0x4f, 0x3c, 0x68, 0x58, 0x7e, 0xde, 0xde, 0x76, 0x26, 0xfb, 0x73, 0x69, 0x09, 0x77, 0x50,
+	0x9d, 0x43, 0x8f, 0x8f, 0xa5, 0x61, 0x3e, 0xb6, 0x79, 0xba, 0x71, 0x0e, 0xe5, 0x77, 0xb8, 0x87,
+	0xfb, 0x74, 0x07, 0x17, 0x71, 0x37, 0xae, 0xb6, 0x59, 0x8e, 0x26, 0xc5, 0xdf, 0x33, 0x59, 0xa7,
+	0xff, 0xfb, 0xf8, 0x0d, 0x00, 0x00, 0xff, 0xff, 0x7a, 0x52, 0x97, 0x96, 0x53, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -184,6 +267,8 @@ const _ = grpc.SupportPackageIsVersion4
 type CalculatorServiceClient interface {
 	// Unary
 	Sum(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*AddResponse, error)
+	// Server Streaming
+	Prime(ctx context.Context, in *PrimeRequest, opts ...grpc.CallOption) (CalculatorService_PrimeClient, error)
 }
 
 type calculatorServiceClient struct {
@@ -203,10 +288,44 @@ func (c *calculatorServiceClient) Sum(ctx context.Context, in *AddRequest, opts 
 	return out, nil
 }
 
+func (c *calculatorServiceClient) Prime(ctx context.Context, in *PrimeRequest, opts ...grpc.CallOption) (CalculatorService_PrimeClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_CalculatorService_serviceDesc.Streams[0], "/pb.CalculatorService/Prime", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &calculatorServicePrimeClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type CalculatorService_PrimeClient interface {
+	Recv() (*PrimeResponse, error)
+	grpc.ClientStream
+}
+
+type calculatorServicePrimeClient struct {
+	grpc.ClientStream
+}
+
+func (x *calculatorServicePrimeClient) Recv() (*PrimeResponse, error) {
+	m := new(PrimeResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CalculatorServiceServer is the server API for CalculatorService service.
 type CalculatorServiceServer interface {
 	// Unary
 	Sum(context.Context, *AddRequest) (*AddResponse, error)
+	// Server Streaming
+	Prime(*PrimeRequest, CalculatorService_PrimeServer) error
 }
 
 func RegisterCalculatorServiceServer(s *grpc.Server, srv CalculatorServiceServer) {
@@ -231,6 +350,27 @@ func _CalculatorService_Sum_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CalculatorService_Prime_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(PrimeRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CalculatorServiceServer).Prime(m, &calculatorServicePrimeServer{stream})
+}
+
+type CalculatorService_PrimeServer interface {
+	Send(*PrimeResponse) error
+	grpc.ServerStream
+}
+
+type calculatorServicePrimeServer struct {
+	grpc.ServerStream
+}
+
+func (x *calculatorServicePrimeServer) Send(m *PrimeResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 var _CalculatorService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.CalculatorService",
 	HandlerType: (*CalculatorServiceServer)(nil),
@@ -240,6 +380,12 @@ var _CalculatorService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _CalculatorService_Sum_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Prime",
+			Handler:       _CalculatorService_Prime_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "calculator.proto",
 }

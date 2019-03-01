@@ -22,6 +22,28 @@ func (s *server) Sum(ctx context.Context, req *pb.AddRequest) (*pb.AddResponse, 
 	return res, nil
 }
 
+func (s *server) Prime(req *pb.PrimeRequest, stream pb.CalculatorService_PrimeServer) error {
+	fmt.Printf("Prime function was invoked with %v ", req)
+	number := req.GetNumber()
+	var i uint32 = 2
+	for number > i {
+		if number%i == 0 {
+			number = number / i
+			res := &pb.PrimeResponse{
+				Number: i,
+			}
+			if err := stream.Send(res); err != nil {
+				log.Fatalf("something get wrong : %v", err)
+				return err
+			}
+		} else {
+			i++
+		}
+	}
+
+	return nil
+}
+
 func main() {
 	lis, err := net.Listen("tcp", "0.0.0.0:50051")
 	if err != nil {
