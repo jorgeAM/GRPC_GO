@@ -53,7 +53,6 @@ func (s *server) LongGreet(stream greet.GreetService_LongGreetServer) error {
 			return stream.SendAndClose(&greet.LongGreetResponse{
 				Result: result,
 			})
-
 		}
 
 		if err != nil {
