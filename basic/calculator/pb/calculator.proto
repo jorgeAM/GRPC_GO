@@ -23,10 +23,21 @@ message PrimeResponse {
     uint32 number = 1;
 }
 
+message AverageRequest {
+    float number = 1;
+}
+
+message AverageResponse {
+    float result = 1;
+}
+
 service CalculatorService{
     // Unary
     rpc Sum (AddRequest) returns (AddResponse) {};
 
     // Server Streaming
     rpc Prime (PrimeRequest) returns (stream PrimeResponse) {};
+
+    // Client Streaming
+    rpc Average (stream AverageRequest) returns (AverageResponse) {};
 }

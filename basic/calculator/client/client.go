@@ -20,7 +20,8 @@ func main() {
 	defer conn.Close()
 	client := pb.NewCalculatorServiceClient(conn)
 	//doUnary(client)
-	doServerStreaming(client)
+	//doServerStreaming(client)
+	doClientStreaming(client)
 }
 
 func doUnary(client pb.CalculatorServiceClient) {
@@ -62,4 +63,43 @@ func doServerStreaming(client pb.CalculatorServiceClient) {
 
 		fmt.Printf("Response from Prime: %v \n", res.Number)
 	}
+}
+
+func doClientStreaming(client pb.CalculatorServiceClient) {
+	fmt.Println("Starting do Client Streaming RPC")
+	req := []*pb.AverageRequest{
+		&pb.AverageRequest{
+			Number: 1,
+		},
+		&pb.AverageRequest{
+			Number: 2,
+		},
+		&pb.AverageRequest{
+			Number: 3,
+		},
+		&pb.AverageRequest{
+			Number: 4,
+		},
+	}
+	stream, err := client.Average(context.Background())
+	if err != nil {
+		log.Fatalf("error while calling Average RPC: %v", err)
+	}
+
+	for _, i := range req {
+		if err := stream.Send(i); err != nil {
+			if err == io.EOF {
+				break
+			}
+
+			log.Fatalf("error while reading request: %v", err)
+		}
+	}
+
+	res, err := stream.CloseAndRecv()
+	if err != nil {
+		log.Fatalf("error while response: %v", err)
+	}
+
+	log.Printf("Response from Average: %v \n", res.Result)
 }
