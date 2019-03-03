@@ -26,7 +26,7 @@ func (s *server) Prime(req *pb.PrimeRequest, stream pb.CalculatorService_PrimeSe
 	fmt.Printf("Prime function was invoked with %v ", req)
 	number := req.GetNumber()
 	var i uint32 = 2
-	for number > i {
+	for number >= i {
 		if number%i == 0 {
 			number = number / i
 			res := &pb.PrimeResponse{
