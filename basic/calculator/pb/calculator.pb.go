@@ -522,6 +522,9 @@ type CalculatorServiceClient interface {
 	Average(ctx context.Context, opts ...grpc.CallOption) (CalculatorService_AverageClient, error)
 	// BiDi Streaming
 	Max(ctx context.Context, opts ...grpc.CallOption) (CalculatorService_MaxClient, error)
+	// Error Handling
+	// This RPC will throw an exception if the sent number is negative
+	// The error being sent is of type INVALID_ARGUMENT
 	SquareRoot(ctx context.Context, in *SquareRootRequest, opts ...grpc.CallOption) (*SquareRootResponse, error)
 }
 
@@ -658,6 +661,9 @@ type CalculatorServiceServer interface {
 	Average(CalculatorService_AverageServer) error
 	// BiDi Streaming
 	Max(CalculatorService_MaxServer) error
+	// Error Handling
+	// This RPC will throw an exception if the sent number is negative
+	// The error being sent is of type INVALID_ARGUMENT
 	SquareRoot(context.Context, *SquareRootRequest) (*SquareRootResponse, error)
 }
 

@@ -60,5 +60,8 @@ service CalculatorService{
     // BiDi Streaming
     rpc Max (stream MaxRequest) returns (stream MaxResponse) {};
 
+    // Error Handling
+    // This RPC will throw an exception if the sent number is negative
+    // The error being sent is of type INVALID_ARGUMENT
     rpc SquareRoot (SquareRootRequest) returns (SquareRootResponse) {};
 }
