@@ -39,6 +39,14 @@ message MaxResponse {
     uint32 number = 1;
 }
 
+message SquareRootRequest {
+    int32 number = 1;
+}
+
+message SquareRootResponse {
+    double number_root = 1;
+}
+
 service CalculatorService{
     // Unary
     rpc Sum (AddRequest) returns (AddResponse) {};
@@ -51,4 +59,6 @@ service CalculatorService{
 
     // BiDi Streaming
     rpc Max (stream MaxRequest) returns (stream MaxResponse) {};
+
+    rpc SquareRoot (SquareRootRequest) returns (SquareRootResponse) {};
 }
