@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"time"
 
 	"github.com/jorgeAM/udemy/basic/greet/greet"
 
@@ -21,7 +22,8 @@ func main() {
 	client := greet.NewGreetServiceClient(conn)
 	//doUnary(client)
 	//doServerStreaming(client)
-	doClientStreaming(client)
+	//doClientStreaming(client)
+	doBiDiStreaming(client)
 }
 
 func doUnary(client greet.GreetServiceClient) {
@@ -115,4 +117,71 @@ func doClientStreaming(client greet.GreetServiceClient) {
 	}
 
 	log.Printf("Response from LongGreet: %v \n", res.Result)
+}
+
+func doBiDiStreaming(client greet.GreetServiceClient) {
+	req := []*greet.GreetEveryoneRequest{
+		&greet.GreetEveryoneRequest{
+			Greeting: &greet.Greeting{
+				FirstName: "Jorge",
+				LastName:  "Alfaro",
+			},
+		},
+		&greet.GreetEveryoneRequest{
+			Greeting: &greet.Greeting{
+				FirstName: "Basti",
+				LastName:  "Murga",
+			},
+		},
+		&greet.GreetEveryoneRequest{
+			Greeting: &greet.Greeting{
+				FirstName: "Pancho",
+				LastName:  "Alfaro",
+			},
+		},
+		&greet.GreetEveryoneRequest{
+			Greeting: &greet.Greeting{
+				FirstName: "Lili",
+				LastName:  "Alfaro",
+			},
+		},
+	}
+	stream, err := client.GreetEveryone(context.Background())
+	if err != nil {
+		log.Fatalf("error while calling GreetEveryone RPC: %v", err)
+	}
+
+	waitc := make(chan struct{})
+	// we send a bunch of messages to the client
+	go func() {
+		for _, i := range req {
+			fmt.Printf("Sending message: %v \n", i)
+			stream.Send(i)
+			time.Sleep(1000 * time.Millisecond)
+		}
+
+		stream.CloseSend()
+	}()
+
+	//we receive a bunch of message from the client
+	go func() {
+		for {
+			res, err := stream.Recv()
+			if err == io.EOF {
+				break
+			}
+
+			if err != nil {
+				log.Fatalf("Error while reciving %v", err)
+				break
+			}
+
+			fmt.Printf("Received %v \n", res.GetResult())
+		}
+
+		close(waitc)
+	}()
+
+	// block until everything is done
+	<-waitc
 }
