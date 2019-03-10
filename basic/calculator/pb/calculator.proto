@@ -50,5 +50,5 @@ service CalculatorService{
     rpc Average (stream AverageRequest) returns (AverageResponse) {};
 
     // BiDi Streaming
-    rpc GreetEveryone (stream MaxRequest) returns (stream MaxResponse) {};
+    rpc Max (stream MaxRequest) returns (stream MaxResponse) {};
 }
