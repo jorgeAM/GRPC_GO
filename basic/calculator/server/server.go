@@ -8,6 +8,8 @@ import (
 	"math"
 	"net"
 
+	"google.golang.org/grpc/reflection"
+
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
@@ -119,6 +121,7 @@ func main() {
 
 	grpcServer := grpc.NewServer()
 	pb.RegisterCalculatorServiceServer(grpcServer, &server{})
+	reflection.Register(grpcServer)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to run server: %v", err)
 	}
